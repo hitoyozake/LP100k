@@ -84,13 +84,29 @@ def problem_04():
 
     return dic
 
+
+def get_n_gram(s, n):
+    """
+    n-gramを作成する
+    :param s: input string
+    :param n: n
+    :return: n-gram list[str]
+    """
+    out = []
+    for i in range(0, len(s)-n+1):
+        out.append(s[i:i+n])
+    return out
+
 def problem_05():
     """
-
+    与えられたシーケンス（文字列やリストなど）からn-gramを作る関数を作成せよ．この関数を用い，"I am an NLPer"という文から単語bi-gram，文字bi-gramを得よ．
     :return:
     """
+    s = "I am an NLPer"
+    char_out = get_n_gram(s, 2)
+    print(char_out)
 
 
 
 if __name__ == '__main__':
-    problem_04()
+    problem_05()
