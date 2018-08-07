@@ -130,5 +130,17 @@ def problem_06():
     print(wa_set)
     print(seki_set)
 
+    # 差集合
+    diff1, diff2 = s1-s2, s2-s1
+
+    print(diff1!=diff2) # true
+    print(diff1)
+    print(diff2)
+
+    if 'se' in s1:
+        print('se in s1')
+    if 'se' in s2:
+        print('se in s2')
+
 if __name__ == '__main__':
     problem_06()
