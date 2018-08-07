@@ -58,9 +58,39 @@ def problem_03():
 
     return out
 
+def problem_04():
+    """
+    04. 元素記号
+"Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."という文を単語に分解し，1, 5, 6, 7, 8, 9, 15, 16, 19番目の単語は先頭の1文字，それ以外の単語は先頭に2文字を取り出し，取り出した文字列から単語の位置（先頭から何番目の単語か）への連想配列（辞書型もしくはマップ型）を作成せよ．
+    :return:
+    """
 
+    s = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can."
+
+    mono = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+
+    s = s.replace(',', '').replace(',', '')
+
+    dic = {}
+
+    for index, word in enumerate(s.split(' ')):
+        print("{0} : {1}".format(index, word))
+        if index+1 in mono:
+            dic[word[0]] = word
+        else:
+            dic[word[0:2]] = word
+
+    print("Dictionary: {0}".format(dic))
+
+    return dic
+
+def problem_05():
+    """
+
+    :return:
+    """
 
 
 
 if __name__ == '__main__':
-    problem_03()
+    problem_04()
