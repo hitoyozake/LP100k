@@ -88,7 +88,7 @@ def problem_04():
 def get_n_gram(s, n):
     """
     n-gramを作成する
-    :param s: input string
+    :param s: input string or iterative object
     :param n: n
     :return: n-gram list[str]
     """
