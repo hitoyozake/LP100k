@@ -110,6 +110,25 @@ def problem_05():
 
     print(word_out)
 
+def problem_06():
+    """
+    06. 集合
+"paraparaparadise"と"paragraph"に含まれる文字bi-gramの集合を，それぞれ, XとYとして求め，XとYの和集合，積集合，差集合を求めよ．さらに，'se'というbi-gramがXおよびYに含まれるかどうかを調べよ．
+    :return:
+    """
+    s1, s2 = "paraparaparadise", "paragraph"
+
+    s1 = get_n_gram(s1, 2)
+    s2 = get_n_gram(s2, 2)
+
+    s1 = set(s1)
+    s2 = set(s2)
+
+    wa_set = s1 | s2
+    seki_set = s1 & s2
+
+    print(wa_set)
+    print(seki_set)
 
 if __name__ == '__main__':
-    problem_05()
+    problem_06()
