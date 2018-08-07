@@ -106,6 +106,9 @@ def problem_05():
     char_out = get_n_gram(s, 2)
     print(char_out)
 
+    word_out = get_n_gram(s.split(' '), 2)
+
+    print(word_out)
 
 
 if __name__ == '__main__':
