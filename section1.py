@@ -142,5 +142,20 @@ def problem_06():
     if 'se' in s2:
         print('se in s2')
 
+def problem_07(x, y, z):
+    """
+    07. テンプレートによる文生成
+引数x, y, zを受け取り「x時のyはz」という文字列を返す関数を実装せよ．さらに，x=12, y="気温", z=22.4として，実行結果を確認せよ．
+
+
+    :return:
+    """
+
+    out =  "{0}時の{1}は{2}".format(x, y, z)
+
+    print(out)
+
+    return out
+
 if __name__ == '__main__':
     problem_06()
