@@ -179,5 +179,26 @@ def problem_08(s):
 
     return out
 
+def problem_09(s):
+
+    """
+    09. Typoglycemia
+スペースで区切られた単語列に対して，各単語の先頭と末尾の文字は残し，それ以外の文字の順序をランダムに並び替えるプログラムを作成せよ．ただし，長さが４以下の単語は並び替えないこととする．適当な英語の文（例えば"I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind ."）を与え，その実行結果を確認せよ．
+    :param s:
+    :return:
+    """
+
+    splited = s.split(' ')
+    med = splited[1:-1]
+    import random
+    random.shuffle(med)
+    out = splited[0] + " " + " ".join(med) + " " + splited[-1]
+
+    print(med)
+
+    print(out)
+
+    return out
+
 if __name__ == '__main__':
-    problem_08("aBcDEfg1234")
+    problem_09("I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind .")
