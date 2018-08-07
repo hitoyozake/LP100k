@@ -157,5 +157,27 @@ def problem_07(x, y, z):
 
     return out
 
+def problem_08(s):
+    """
+    08. 暗号文
+与えられた文字列の各文字を，以下の仕様で変換する関数cipherを実装せよ．
+
+英小文字ならば(219 - 文字コード)の文字に置換
+その他の文字はそのまま出力
+この関数を用い，英語のメッセージを暗号化・復号化せよ．
+    :param s:
+    :return:
+    """
+    out = ""
+    for c in s:
+        if c.islower():
+            out += chr(219 - ord(c))
+        else:
+            out += c
+
+    print(out)
+
+    return out
+
 if __name__ == '__main__':
-    problem_06()
+    problem_08("aBcDEfg1234")
