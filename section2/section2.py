@@ -59,7 +59,24 @@ def problem_12():
     with open("col2.txt", "w") as fp:
         fp.write("\n".join(col2))
 
+def problem_13():
+    c1, c2 = [], []
+    with open("col1.txt") as fp:
+        c1 = fp.readlines()
+    with open("col2.txt") as fp:
+        c2 = fp.readlines()
+
+    out = []
+
+    for x, y in zip(c1, c2):
+        out.append(x.replace('\n', '') +"\t"+y.replace('\n', ''))
+
+    out = "\n".join(out)
+
+    print(out)
+
+    return out
 
 if __name__ == "__main__":
     print("section2")
-    problem_12()
+    problem_13()
