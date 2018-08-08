@@ -43,7 +43,23 @@ def problem_11():
 
     return out
 
+def problem_12():
+    with open(INPUT) as fp:
+        strs = fp.readlines()
+
+        col1 = []
+        col2 = []
+        for s in strs:
+            c1, c2 = s.split("\t")[0:2]
+            col1.append(c1)
+            col2.append(c2)
+
+    with open("col1.txt", "w") as fp:
+        fp.write("\n".join(col1))
+    with open("col2.txt", "w") as fp:
+        fp.write("\n".join(col2))
+
 
 if __name__ == "__main__":
     print("section2")
-    problem_11()
+    problem_12()
