@@ -94,6 +94,27 @@ def problem_14(n):
             if line is None:
                 break
 
+def problem_15(n):
+    """
+    15. 末尾のN行を出力
+自然数Nをコマンドライン引数などの手段で受け取り，入力のうち末尾のN行だけを表示せよ．確認にはtailコマンドを用いよ．
+    :param n:
+    :return:
+    """
+    with open(INPUT) as fp:
+        strs = []
+
+        for line in fp:
+            strs.append(line)
+
+        for i in strs[-n::1]:
+            line = i
+            line = line.replace('\n', '')
+            line = line.replace('\r', '')
+            print(line)
+            if line is None:
+                break
+
 if __name__ == "__main__":
     print("section2")
-    problem_14(4)
+    problem_15(4)
