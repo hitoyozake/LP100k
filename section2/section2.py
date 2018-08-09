@@ -115,6 +115,34 @@ def problem_15(n):
             if line is None:
                 break
 
+def problem_16(n):
+    """
+    16. ファイルをN分割する
+自然数Nをコマンドライン引数などの手段で受け取り，入力のファイルを行単位でN分割せよ．同様の処理をsplitコマンドで実現せよ．
+
+
+    :param n:
+    :return:
+    """
+    with open(INPUT) as fp:
+        strs = []
+
+        for line in fp:
+            strs.append(line)
+
+        l = len(strs)
+
+        for i in range(n-1):
+            with open("{0}.txt".format(i), "w") as ofp:
+                for j in range(int(l/n)):
+                    index=j + i*l
+                    ofp.write(strs[j + int(i*l/n)])
+
+        with open("{0}.txt".format(n-1), "w") as ofp:
+            for i in range(int((n-1)*l/n), len(strs)):
+                ofp.write(strs[i])
+
+
 if __name__ == "__main__":
     print("section2")
-    problem_15(4)
+    problem_16(5)
