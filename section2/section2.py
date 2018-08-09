@@ -152,7 +152,16 @@ def problem_17():
     for i in col1:
         print(i)
 
+def problem_18():
+    strs = []
+    with open(INPUT) as fp:
+        strs = [i.split('\t') for i in fp]
+
+    strs.sort(key=lambda x:x[2])
+
+    print(strs)
+
 
 if __name__ == "__main__":
     print("section2")
-    problem_17()
+    problem_18()
