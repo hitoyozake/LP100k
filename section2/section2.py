@@ -161,9 +161,27 @@ def problem_18():
 
     print(strs)
 
-def
+def problem_19():
+    """
+    各行の1列目の文字列の出現頻度を求め，その高い順に並べて表示せよ．確認にはcut, uniq, sortコマンドを用いよ．
+    :return:
+    """
+    dic = {}
+
+    with open(INPUT) as fp:
+        for line in fp:
+            s = line.split('\t')
+            if s[0] not in dic:
+                dic[s[0]] = []
+            dic[s[0]].append(line)
+    l = sorted(dic.items(), key=lambda x:len(x[1]))
+
+    l.reverse()
+
+    for i in l:
+        print(i[1])
 
 
 if __name__ == "__main__":
     print("section2")
-    problem_18()
+    problem_19()
