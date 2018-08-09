@@ -161,6 +161,8 @@ def problem_18():
 
     print(strs)
 
+def
+
 
 if __name__ == "__main__":
     print("section2")
