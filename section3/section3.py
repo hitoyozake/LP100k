@@ -36,6 +36,24 @@ def problem_20():
     for i in d:
         print(i)
 
+def problem_21():
+    """
+    21. カテゴリ名を含む行を抽出
+記事中でカテゴリ名を宣言している行を抽出せよ．
+    :return:
+    """
+    d = load_json()
+
+    d = extract_about_UK(d)
+
+    for i in d:
+        print("******************")
+        x = i['text'].split('\n')
+        for j in x:
+            if 'Category' in j:
+                print(j)
+        print("******************")
+
 
 if __name__ == '__main__':
-    problem_20()
+    problem_21()
