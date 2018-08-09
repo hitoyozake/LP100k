@@ -143,6 +143,16 @@ def problem_16(n):
                 ofp.write(strs[i])
 
 
+def problem_17():
+    col1 = set()
+    with open(INPUT) as fp:
+        for i in fp:
+            col1.add(i.split('\t')[0])
+
+    for i in col1:
+        print(i)
+
+
 if __name__ == "__main__":
     print("section2")
-    problem_16(5)
+    problem_17()
