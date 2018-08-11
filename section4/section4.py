@@ -28,6 +28,12 @@ def problem_30():
     for s in lines:
         print(m.parse(s))
 
+def problem_31():
+    """
+
+    :return:
+    """
+
 
 if __name__ == '__main__':
     problem_30()
