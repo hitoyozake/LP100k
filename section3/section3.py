@@ -67,5 +67,21 @@ def problem_22():
             if re.match('.+\[Category:.+', j):
                 print(j)
 
+def problem_23():
+    """
+23. セクション構造
+記事中に含まれるセクション名とそのレベル（例えば"== セクション名 =="なら1）を表示せよ．
+    :return:
+    """
+    d = extract_about_UK(load_json())
+
+    for i in d:
+        x = i['text'].split('\n')
+
+        for j in x:
+            if re.match('=+ .+ =+', j):
+                print("{0} : {1}".format(j, j.count("=")/2-1))
+
+
 if __name__ == '__main__':
-    problem_22()
+    problem_23()
