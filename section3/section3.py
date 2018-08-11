@@ -82,6 +82,27 @@ def problem_23():
             if re.match('=+ .+ =+', j):
                 print("{0} : {1}".format(j, j.count("=")/2-1))
 
+def problem_24():
+    """
+    24. ファイル参照の抽出
+記事から参照されているメディアファイルをすべて抜き出せ．
+
+
+    :return:
+    """
+
+    d = extract_about_UK(load_json())
+
+    for i in d:
+        x = i['text'].split('\n')
+
+        for j in x:
+            r = re.search('\s[a-zA-Z0-9]+\.(png|jpe?g)', j)
+            if r:
+                print(r.group(0))
+
+
+
 
 if __name__ == '__main__':
-    problem_23()
+    problem_24()
