@@ -30,11 +30,26 @@ def problem_30():
 
 def problem_31():
     """
-
+    31. 動詞
+動詞の表層形をすべて抽出せよ．
     :return:
     """
+    m = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
+
+
+    lines = load_neco()
+
+    for s in lines:
+
+        x = m.parse(s).split('\t')
+
+        if len(x) >= 2:
+            kind = x[1].split(',')[0]
+            if kind == '動詞':
+                print(kind)
+
 
 
 if __name__ == '__main__':
-    problem_30()
+    problem_31()
 
