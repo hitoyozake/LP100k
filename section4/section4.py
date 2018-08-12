@@ -77,9 +77,9 @@ def problem_32():
     """
     x = problem_30()
 
-    for i in x:
-        if i['pos'] == '動詞':
-            print("表層形 : {0}, 原形 : {1}".format(i['surface'], converter(i['surface'])))
+    for i in range(len(x)-1):
+        if x[i]['pos'] == '動詞':
+            print("表層形 : {0}, 原形 : {1}".format(x[i]['surface'], converter(x[i]['surface']+x[i+1]['surface'])))
 
 
 if __name__ == '__main__':
