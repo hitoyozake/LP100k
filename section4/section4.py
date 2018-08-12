@@ -18,6 +18,12 @@ def load_neco():
             strs.append(s)
         return strs
 
+
+def converter(word):
+    m = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
+
+    return m.parse(word).split('\t')[1].split(',')[6]
+
 def problem_30():
     """
     形態素解析結果（neko.txt.mecab）を読み込むプログラムを実装せよ．
@@ -42,7 +48,8 @@ def problem_30():
                 y = x.split('\t')
                 molphens = y[1].split(',')
                 # print("{0}:{1}".format(y[0], molphens))
-                dictionary['surface'] = molphens[6]
+                dictionary['surface'] = y[0]
+                dictionary['pos1'] = molphens[1]
                 dictionary['base'] = molphens[5]
                 dictionary['pos'] = molphens[0]
                 # print(dictionary)
@@ -62,7 +69,19 @@ def problem_31():
         if i['pos'] == '動詞':
             print(i['surface'])
 
+def problem_32():
+    """
+    32. 動詞の原形
+動詞の原形をすべて抽出せよ．
+    :return:
+    """
+    x = problem_30()
+
+    for i in x:
+        if i['pos'] == '動詞':
+            print("表層形 : {0}, 原形 : {1}".format(i['surface'], converter(i['surface'])))
+
 
 if __name__ == '__main__':
-    problem_31()
+    problem_32()
 
