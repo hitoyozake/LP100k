@@ -30,13 +30,16 @@ def problem_30():
 
     lines = load_neco()
 
-    dictionary = {}
+
+    output = []
 
     for l in lines:
         parsed = m.parse(l).split('\n')
 
         for x in parsed:
             if x != 'EOS' and x != '':
+                dictionary = {}
+
                 y = x.split('\t')
                 molphens = y[1].split(',')
                 print("{0}:{1}".format(y[0], molphens))
@@ -44,7 +47,9 @@ def problem_30():
                 dictionary['base'] = molphens[5]
                 dictionary['pos'] = molphens[0]
                 print(dictionary)
-            print("**********")
+                output.append(dictionary)
+
+    return output
 
 def problem_31():
     """
