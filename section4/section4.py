@@ -14,7 +14,7 @@ def load_neco():
         strs = []
         for s in fp:
             s = s.replace('\n', '')
-            print(s)
+            # print(s)
             strs.append(s)
         return strs
 
@@ -30,7 +30,6 @@ def problem_30():
 
     lines = load_neco()
 
-
     output = []
 
     for l in lines:
@@ -42,11 +41,11 @@ def problem_30():
 
                 y = x.split('\t')
                 molphens = y[1].split(',')
-                print("{0}:{1}".format(y[0], molphens))
+                # print("{0}:{1}".format(y[0], molphens))
                 dictionary['surface'] = molphens[6]
                 dictionary['base'] = molphens[5]
                 dictionary['pos'] = molphens[0]
-                print(dictionary)
+                # print(dictionary)
                 output.append(dictionary)
 
     return output
@@ -57,21 +56,13 @@ def problem_31():
 動詞の表層形をすべて抽出せよ．
     :return:
     """
-    m = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
+    x = problem_30()
 
-    lines = load_neco()
-
-    for s in lines:
-
-        x = m.parse(s).split('\t')
-
-        if len(x) >= 2:
-            kind = x[1].split(',')[0]
-            if kind == '動詞':
-                print(kind)
-
+    for i in x:
+        if i['pos'] == '動詞':
+            print(i['surface'])
 
 
 if __name__ == '__main__':
-    problem_30()
+    problem_31()
 
