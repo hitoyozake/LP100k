@@ -100,8 +100,21 @@ def problem_33():
                 print(i['surface'])
 
 
+def problem_34():
+    """
+    34. 「AのB」
+    2つの名詞が「の」で連結されている名詞句を抽出せよ．
+    :return:
+    """
+
+    x = problem_30()
+
+    for i in range(2, len(x) - 2):
+        if x[i-2]['pos'] == '名詞' and x[i-1]['surface'] == 'の' and x[i]['pos'] == '名詞':
+            print("{0}{1}{2}".format(x[i-2]['surface'], x[i-1]['surface'], x[i]['surface']))
+
 
 
 if __name__ == '__main__':
-    problem_33()
+    problem_34()
 
