@@ -82,6 +82,26 @@ def problem_32():
             print("表層形 : {0}, 原形 : {1}".format(x[i]['surface'], converter(x[i]['surface']+x[i+1]['surface'])))
 
 
+def problem_33():
+    """
+    33. サ変名詞
+    サ変接続の名詞をすべて抽出せよ．
+    :return:
+    """
+
+    x = problem_30()
+
+    m = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
+
+
+    for i in x:
+        if i['pos'] == '名詞':
+            if m.parse(i['surface']).split('\t')[1].split(',')[1] == 'サ変接続':
+                print(i['surface'])
+
+
+
+
 if __name__ == '__main__':
-    problem_32()
+    problem_33()
 
