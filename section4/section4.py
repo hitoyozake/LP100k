@@ -11,7 +11,12 @@ import MeCab
 
 def load_neco():
     with open('neko.txt') as fp:
-        return fp.readlines()
+        strs = []
+        for s in fp:
+            s = s.replace('\n', '')
+            print(s)
+            strs.append(s)
+        return strs
 
 def problem_30():
     """
@@ -21,12 +26,25 @@ def problem_30():
     第4章の残りの問題では，ここで作ったプログラムを活用せよ．
     :return:
     """
-    m = MeCab.Tagger("-Ochasen -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
+    m = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
 
     lines = load_neco()
 
-    for s in lines:
-        print(m.parse(s))
+    dictionary = {}
+
+    for l in lines:
+        parsed = m.parse(l).split('\n')
+
+        for x in parsed:
+            if x != 'EOS' and x != '':
+                y = x.split('\t')
+                molphens = y[1].split(',')
+                print("{0}:{1}".format(y[0], molphens))
+                dictionary['surface'] = molphens[6]
+                dictionary['base'] = molphens[5]
+                dictionary['pos'] = molphens[0]
+                print(dictionary)
+            print("**********")
 
 def problem_31():
     """
@@ -35,7 +53,6 @@ def problem_31():
     :return:
     """
     m = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
-
 
     lines = load_neco()
 
@@ -51,5 +68,5 @@ def problem_31():
 
 
 if __name__ == '__main__':
-    problem_31()
+    problem_30()
 
