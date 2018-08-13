@@ -160,6 +160,21 @@ def problem_36():
     print(dictionary)
 
 
+def problem_37():
+    """
+    37. 頻度上位10語
+出現頻度が高い10語とその出現頻度をグラフ（例えば棒グラフなど）で表示せよ．
+    :return:
+    """
+
+    import matplotlib as mtl
+
+    x = problem_30()
+
+    dictionary = {}
+
+
+
 
 
 
