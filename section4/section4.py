@@ -193,11 +193,35 @@ def problem_37():
 
     plt.show()
 
+def problem_38():
+    """
+    38. ヒストグラム
+単語の出現頻度のヒストグラム（横軸に出現頻度，縦軸に出現頻度をとる単語の種類数を棒グラフで表したもの）を描け．
+    :return:
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    dictionary = problem_36()
+
+    lst_out = []
+    lst = list(dictionary)
+
+    for i in lst:
+        print(i)
+        lst_out.append(i[1])
+
+    vals = np.arange(len(lst_out))
+
+    print(lst_out)
+
+    plt.bar(x=vals, height=lst_out)
+
+    plt.show()
 
 
 
 
 
 if __name__ == '__main__':
-    problem_37()
+    problem_38()
 
