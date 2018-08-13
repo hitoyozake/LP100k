@@ -215,6 +215,7 @@ def problem_38():
     print(lst_out)
 
     plt.bar(x=vals, height=lst_out)
+    plt.yscale('log')
 
     plt.show()
 
