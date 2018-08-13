@@ -157,7 +157,11 @@ def problem_36():
         """
         dictionary[i['surface']] += 1
 
+    dictionary = sorted(dictionary.items(), key=lambda x: x[1], reverse=True)
+
     print(dictionary)
+
+    return dictionary
 
 
 def problem_37():
@@ -167,11 +171,27 @@ def problem_37():
     :return:
     """
 
-    import matplotlib as mtl
+    import matplotlib.pyplot as plt
 
-    x = problem_30()
+    dictionary = problem_36()
 
-    dictionary = {}
+    lst_out = []
+    lst = list(dictionary)
+
+    for i in lst[:10]:
+        print(i)
+        lst_out.append(i[1])
+
+    vals = []
+
+    for i in range(10):
+        vals.append(i)
+
+    print(lst_out)
+
+    plt.bar(left=vals, height=lst_out)
+
+    plt.show()
 
 
 
@@ -179,5 +199,5 @@ def problem_37():
 
 
 if __name__ == '__main__':
-    problem_36()
+    problem_37()
 
