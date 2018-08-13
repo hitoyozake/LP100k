@@ -115,6 +115,54 @@ def problem_34():
 
 
 
+def problem_35():
+    """
+    35. 名詞の連接
+名詞の連接（連続して出現する名詞）を最長一致で抽出せよ
+    :return: 
+    """
+    x = problem_30()
+
+    for index in range(len(x)):
+        if x[index]['pos'] == '名詞':
+            count = 1
+            for i2 in range(min(len(x), index+1), len(x)):
+                if x[index]['surface'] == x[i2]['surface']:
+                    count += 1
+                else:
+                    break
+            if count >= 2:
+                print("{1} count:{0}".format(count, x[index]['surface']))
+
+
+def problem_36():
+    """
+    36. 単語の出現頻度
+文章中に出現する単語とその出現頻度を求め，出現頻度の高い順に並べよ．
+    :return:
+    """
+    x = problem_30()
+
+    dictionary = {}
+
+    from collections import defaultdict
+    # dictionary = defaultdict(int)
+    dictionary = defaultdict(lambda : 0)
+
+    for i in x:
+        """
+        if i['surface'] not in dictionary:
+            dictionary[i['surface']] = 0
+        dictionary[i['surface']] += 1
+        """
+        dictionary[i['surface']] += 1
+
+    print(dictionary)
+
+
+
+
+
 if __name__ == '__main__':
-    problem_34()
+    problem_36()
 
