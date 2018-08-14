@@ -12,11 +12,21 @@ def get_kakariuke():
 
     :return:
     """
-    parser = CaboCha.Parser("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
+    import sys, os
 
-    r = parser.parseToString("吾輩は猫である．名前はまだない．今日は大きいおにぎりを食べた．")
+    CABOCHA_FILE = "neko.cabocha"
 
-    print(r)
+    if not os.path.exists(CABOCHA_FILE):
+        r = ""
+        with open("./neko.txt") as fp:
+            strs = fp.readlines()
+
+            parser = CaboCha.Parser("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
+
+            for i in strs:
+                r = parser.parseToString(i)
+                print(r)
+
 
 
 if __name__ == '__main__':
