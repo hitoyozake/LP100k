@@ -65,16 +65,15 @@ def problem_40():
             sentence = ""
             parsed = mcb.parse(s)
             Morphs = []
-
+            s = s.replace('\n', '')
             if len(parsed) > 0:
                 p = parsed.split('\n')
-                sentence = p[0] # 原文を保存
-                # print(sentence)
-                for m in p[1:]:
+
+                for m in p:
                     if m != 'EOS' and m != '':
                         y = m.split('\t')
                         molphens = y[1].split(',')
-                        print("{0}:{1}".format(y[0], molphens))
+                        # print("{0}:{1}".format(y[0], molphens))
 
                         mlp = Morph()
                         mlp.surface = y[0]
@@ -83,9 +82,10 @@ def problem_40():
                         mlp.pos = molphens[0]
                         Morphs.append(mlp)
 
-                sentences.append((sentence, Morphs))
+                sentences.append((s, Morphs))
 
-    print(sentences)
+    for s in sentences:
+       print("結果 : {0}, *** {1}".format(s[0], s[1]))
 
     # with open(CABOCHA_FILE) as fp:
     #     for i in fp:
