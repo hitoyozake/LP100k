@@ -60,11 +60,13 @@ def problem_40():
     sentences = []
 
     with open("neko.txt") as fp:
-        MorphList = []
+
         for s in fp:
+            print(s)
             parsed = mcb.parse(s)
             Morphs = []
-
+            print(parsed)
+            """
             for m in parsed:
                 if m != 'EOS' and m != '':
                     y = m.split('\t')
@@ -77,17 +79,14 @@ def problem_40():
                     mlp.pos = molphens[0]
 
                     Morphs.append(mlp)
-                MophList.append(Morphs)
+            sentences.append(Morphs)
 
-        """
-            
-        """
-
-
+    print(sentences)
+    
     with open(CABOCHA_FILE) as fp:
         for i in fp:
             print(i)
-
+    """
 
 if __name__ == '__main__':
-    get_kakariuke()
+    problem_40()
