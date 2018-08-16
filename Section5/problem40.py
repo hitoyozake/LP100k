@@ -62,31 +62,35 @@ def problem_40():
     with open("neko.txt") as fp:
 
         for s in fp:
-            print(s)
+            sentence = ""
             parsed = mcb.parse(s)
             Morphs = []
-            print(parsed)
-            """
-            for m in parsed:
-                if m != 'EOS' and m != '':
-                    y = m.split('\t')
-                    molphens = y[1].split(',')
-                    # print("{0}:{1}".format(y[0], molphens))
-                    mlp = Morph()
-                    mlp.surface = y[0]
-                    mlp.pos1 = molphens[1]
-                    mlp.base = molphens[5]
-                    mlp.pos = molphens[0]
 
-                    Morphs.append(mlp)
-            sentences.append(Morphs)
+            if len(parsed) > 0:
+                p = parsed.split('\n')
+                sentence = p[0] # 原文を保存
+                # print(sentence)
+                for m in p[1:]:
+                    if m != 'EOS' and m != '':
+                        y = m.split('\t')
+                        molphens = y[1].split(',')
+                        print("{0}:{1}".format(y[0], molphens))
+
+                        mlp = Morph()
+                        mlp.surface = y[0]
+                        mlp.pos1 = molphens[1]
+                        mlp.base = molphens[5]
+                        mlp.pos = molphens[0]
+                        Morphs.append(mlp)
+
+                sentences.append((sentence, Morphs))
 
     print(sentences)
-    
-    with open(CABOCHA_FILE) as fp:
-        for i in fp:
-            print(i)
-    """
+
+    # with open(CABOCHA_FILE) as fp:
+    #     for i in fp:
+    #         print(i)
+
 
 if __name__ == '__main__':
     problem_40()
