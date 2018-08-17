@@ -19,10 +19,6 @@ class Morph():
         """
         """
 
-
-
-
-
 def get_kakariuke():
     """
 
@@ -40,9 +36,64 @@ def get_kakariuke():
 
         with open(CABOCHA_FILE, "w") as ofp:
             for i in strs:
-                r = parser.parseToString(i)
-                print(r)
-                ofp.write(r)
+                tree = parser.parse(i)
+                print(tree)
+                ofp.write(tree.toString(CaboCha.CABOCHA_FORMAT_LATTICE))
+
+
+
+class Chunk():
+    """
+    40
+    に加えて，文節を表すクラスChunkを実装せよ．このクラスは形態素（Morphオブジェクト）のリスト（morphs），
+    係り先文節インデックス番号（dst），係り元文節インデックス番号のリスト（srcs）をメンバ変数に持つこととする．
+    さらに，入力テキストのCaboChaの解析結果を読み込み，１文をChunkオブジェクトのリストとして表現し，8
+    文目の文節の文字列と係り先を表示せよ．第5章の残りの問題では，ここで作ったプログラムを活用せよ．
+    """
+    morphs = []
+    dst = 0
+    srcs = []
+
+from collections import defaultdict
+
+def problem_41():
+    sentences = []
+
+    with open("neko.cabocha") as fp:
+        chunk = Chunk()
+        chunks = []
+        for s in fp:
+            if s[0] == '*':
+                if len(chunk.morphs)>0:
+                    chunks.append(chunk)
+                    chunk = Chunk()
+
+                firstline = s.split(' ')
+                chunk.dst = int(firstline[2].strip('D'))
+                # 係り受けIDはリストのindexに相当
+
+            elif s.find('EOS') >= 0:
+                    for i, c in enumerate(chunks):
+                        if c.dst != -1:
+                            chunks[c.dst].srcs.append(i)
+                    sentences.append(chunks)
+                    chunks = []
+            else:
+                # 形態素の行
+                morph = Morph()
+                dummy = s.split('\t')
+                elements = dummy[1].split(',')
+
+                morph.surface = dummy[0]
+                morph.pos1 = elements[1]
+                morph.base = elements[5]
+                morph.pos = elements[0]
+                chunk.morphs.append(morph)
+
+
+    for sentence in sentences:
+        for i, chunk in enumerate(sentence):
+            print("{0}:{1}".format(i, chunk.dst))
 
 
 def problem_40():
@@ -59,7 +110,7 @@ def problem_40():
     mcb = MeCab.Tagger("-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd")
     sentences = []
 
-    with open("neko.txt") as fp:
+    with open("neko.cabocha") as fp:
 
         for s in fp:
             sentence = ""
@@ -83,14 +134,16 @@ def problem_40():
                         Morphs.append(mlp)
 
                 sentences.append((s, Morphs))
-
+    """
     for s in sentences:
-       print("結果 : {0}, *** {1}".format(s[0], s[1]))
-
-    # with open(CABOCHA_FILE) as fp:
-    #     for i in fp:
-    #         print(i)
+       print("結果 : {0}".format(s[0]))
+       for mrp in s[1]:
+           print("{0}".format(mrp.surface))
+    """
+    with open(CABOCHA_FILE) as fp:
+        for i in fp:
+            print(i)
 
 
 if __name__ == '__main__':
-    problem_40()
+    problem_41()
