@@ -18,6 +18,10 @@ class Morph():
     def __init__(self):
         """
         """
+        self.surface = ""
+        self.pos = ""
+        self.base = ""
+        self.pos1 = ""
 
 def get_kakariuke():
     """
@@ -54,6 +58,11 @@ class Chunk():
     dst = 0
     srcs = []
 
+    def __init__(self):
+        self.morphs = []
+        self.dst = 0
+        self.srcs = []
+
 from collections import defaultdict
 
 def problem_41():
@@ -63,10 +72,9 @@ def problem_41():
         chunk = Chunk()
         chunks = []
         for s in fp:
+            # print("原文：", s)
             if s[0] == '*':
-                if len(chunk.morphs)>0:
-                    chunks.append(chunk)
-                    chunk = Chunk()
+
 
                 firstline = s.split(' ')
                 chunk.dst = int(firstline[2].strip('D'))
@@ -75,15 +83,18 @@ def problem_41():
             elif s.find('EOS') >= 0:
                     for i, c in enumerate(chunks):
                         if c.dst != -1:
-                            chunks[c.dst].srcs.append(i)
+                            chunks[c.dst-1].srcs.append(i)
+                    if len(chunk.morphs)>0:
+                        chunks.append(chunk)
                     sentences.append(chunks)
+                    chunk = Chunk()
                     chunks = []
+
             else:
                 # 形態素の行
                 morph = Morph()
                 dummy = s.split('\t')
                 elements = dummy[1].split(',')
-
                 morph.surface = dummy[0]
                 morph.pos1 = elements[1]
                 morph.base = elements[5]
@@ -91,10 +102,17 @@ def problem_41():
                 chunk.morphs.append(morph)
 
 
-    for sentence in sentences:
-        for i, chunk in enumerate(sentence):
+        for i, chunk in enumerate(sentences[7]):
             print("{0}:{1}".format(i, chunk.dst))
 
+            for morph in chunk.morphs:
+               print("MORPH : {0}".format(morph.surface))
+
+        for i, chunk in enumerate(sentences[8]):
+            print("{0}:{1}".format(i, chunk.dst))
+
+            for morph in chunk.morphs:
+               print("MORPH : {0}".format(morph.surface))
 
 def problem_40():
     """
