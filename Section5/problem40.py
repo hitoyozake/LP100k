@@ -65,7 +65,7 @@ class Chunk():
 
 from collections import defaultdict
 
-def problem_41():
+def problem_41(printout=False):
     sentences = []
 
     with open("neko.cabocha") as fp:
@@ -74,7 +74,9 @@ def problem_41():
         for s in fp:
             # print("原文：", s)
             if s[0] == '*':
-
+                if len(chunk.morphs) > 0:
+                    chunks.append(chunk)
+                chunk = Chunk()
 
                 firstline = s.split(' ')
                 chunk.dst = int(firstline[2].strip('D'))
@@ -85,9 +87,9 @@ def problem_41():
                         if c.dst != -1:
                             chunks[c.dst-1].srcs.append(i)
                     if len(chunk.morphs)>0:
-                        chunks.append(chunk)
-                    sentences.append(chunks)
+                        chunks.append(chunk) # sentencesにchunkのリストをappendする前に現在のchunkも追加しておく
                     chunk = Chunk()
+                    sentences.append(chunks)
                     chunks = []
 
             else:
@@ -101,18 +103,67 @@ def problem_41():
                 morph.pos = elements[0]
                 chunk.morphs.append(morph)
 
+        if printout:
+            for i, chunk in enumerate(sentences[7]):
+                print("{0}:{1}".format(i, chunk.dst))
 
-        for i, chunk in enumerate(sentences[7]):
-            print("{0}:{1}".format(i, chunk.dst))
+                for morph in chunk.morphs:
+                   print("MORPH : {0}".format(morph.surface))
 
+            for i, chunk in enumerate(sentences[8]):
+                print("{0}:{1}".format(i, chunk.dst))
+
+                for morph in chunk.morphs:
+                   print("MORPH : {0}".format(morph.surface))
+
+    return sentences
+
+def generate_tab_sequence(chunks, chunk):
+    lst = []
+    for src in chunk.srcs:
+        lst.append(''.join([ x.surface for x in chunks[src].morphs
+                             if x.pos != "記号" ]))
+
+    return '\t'.join(lst)
+
+
+
+
+def problem_42():
+    """
+    42. 係り元と係り先の文節の表示
+    係り元の文節と係り先の文節のテキストをタブ区切り形式ですべて抽出せよ．
+    ただし，句読点などの記号は出力しないようにせよ．
+    :return:
+    """
+    sentences = problem_41()
+    print(len(sentences))
+    for sentence in sentences:
+        for chunk in sentence:
+            s = ''
+            if chunk.src != -1:
+                print("かかり先：{0}, かかり元:  {1}".format(chunk.dst, generate_tab_sequence(sentence, chunk)))
+
+def problem_43():
+    """
+    名詞を含む文節が，動詞を含む文節に係るとき，これらをタブ区切り形式で抽出せよ．
+    ただし，句読点などの記号は出力しないようにせよ．
+    :return:
+    """
+
+    sentences = problem_41()
+
+    for sentence in sentences:
+        for chunk in sentence:
             for morph in chunk.morphs:
-               print("MORPH : {0}".format(morph.surface))
+                if morph.pos == '名詞':
+                    # かかり先に動詞が含まれるかを調べる
+                    if chunk.dst != -1:
+                        for i in sentence[chunk.dst].morphs:
+                            if i.pos == '動詞':
+                                print(generate_tab_sequence(sentence, chunk))
+                                break
 
-        for i, chunk in enumerate(sentences[8]):
-            print("{0}:{1}".format(i, chunk.dst))
-
-            for morph in chunk.morphs:
-               print("MORPH : {0}".format(morph.surface))
 
 def problem_40():
     """
@@ -164,4 +215,4 @@ def problem_40():
 
 
 if __name__ == '__main__':
-    problem_41()
+    problem_43()
