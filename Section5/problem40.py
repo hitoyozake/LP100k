@@ -289,6 +289,11 @@ def problem_46():
         print("{0}: {1}, {2}".format(a[0], '\t'.join(a[1]), '\t'.join(b[1])))
 
 
+def problem_47():
+    """
+
+    :return:
+    """
 
 
 
