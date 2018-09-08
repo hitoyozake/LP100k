@@ -127,6 +127,12 @@ def generate_tab_sequence(chunks, chunk):
 
     return '\t'.join(lst)
 
+def generate_tab_sequence_with_simbol(chunks, chunk):
+    lst = []
+    for src in chunk.srcs:
+        lst.append(''.join([ x.surface for x in chunks[src].morphs ]))
+
+    return '\t'.join(lst)
 
 
 
@@ -165,6 +171,32 @@ def problem_43():
                                 print(generate_tab_sequence(sentence, chunk))
                                 break
 
+from graphviz import Digraph
+
+def generate_dot(sentence):
+    """
+    受け取った文章を解析してDOTに分ける
+    :param sentence:
+    :return:
+    """
+
+    G = Digraph(format='png')
+    G.attr('node', shape='circle')
+
+    n = 0
+
+    # add node
+    for i, chunk in enumerate(sentence):
+        val = ''.join([ morph.surface for morph in chunk.morphs ] )
+        G.node(name=str(i), label=val)
+
+    for i, chunk in enumerate(sentence):
+        if chunk.dst != -1:
+            G.edge(tail_name=str(i), head_name=str(chunk.dst))
+
+    print(G) # dot形式で出力
+    G.render('binary_tree')
+
 def problem_44():
     """
     与えられた文の係り受け木を有向グラフとして可視化せよ．可視化には，係り受け木を
@@ -173,6 +205,10 @@ def problem_44():
     pydotを使うとよい．
     :return:
     """
+    sentences = problem_41()
+
+    generate_dot(sentences[3])
+
 
 
 def problem_40():
@@ -225,4 +261,4 @@ def problem_40():
 
 
 if __name__ == '__main__':
-    problem_43()
+    problem_44()
