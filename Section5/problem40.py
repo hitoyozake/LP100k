@@ -1,6 +1,7 @@
 # -* encoding: utf-8 *-
 import CaboCha
 import MeCab
+import pydot
 """
 第5章: 係り受け解析
 夏目漱石の小説『吾輩は猫である』の文章（neko.txt）をCaboChaを使って係り受け解析し，
@@ -163,6 +164,15 @@ def problem_43():
                             if i.pos == '動詞':
                                 print(generate_tab_sequence(sentence, chunk))
                                 break
+
+def problem_44():
+    """
+    与えられた文の係り受け木を有向グラフとして可視化せよ．可視化には，係り受け木を
+    DOT言語に変換し，Graphvizを用いるとよい．
+    また，Pythonから有向グラフを直接的に可視化するには，
+    pydotを使うとよい．
+    :return:
+    """
 
 
 def problem_40():
