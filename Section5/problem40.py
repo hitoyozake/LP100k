@@ -268,6 +268,28 @@ def problem_46():
 「吾輩はここで始めて人間というものを見た」という例文（neko.txt.cabochaの8文目）を考える． この文は「始める」と「見る」の２つの動詞を含み，「始める」に係る文節は「ここで」，「見る」に係る文節は「吾輩は」と「ものを」と解析された場合は，次のような出力になるはずである．
     :return:
     """
+    sentences = problem_41()
+
+    sentence = sentences[7]
+
+    v_dict = defaultdict(lambda: [])
+    v_dict2 = defaultdict(lambda: [])
+
+    for chunk in sentence:
+        for morph in chunk.morphs:
+            if morph.pos == '助詞':
+                if chunk.dst != -1:
+                    for mrp in sentence[chunk.dst].morphs:
+                        if mrp.pos == '動詞':
+                            v_dict[mrp.base].append(morph.surface)
+                            v_dict2[mrp.base].append(''.join([m.surface for m in chunk.morphs]))
+
+
+    for a, b in zip(v_dict.items(), v_dict2.items()):
+        print("{0}: {1}, {2}".format(a[0], '\t'.join(a[1]), '\t'.join(b[1])))
+
+
+
 
 
 
@@ -321,4 +343,4 @@ def problem_40():
 
 
 if __name__ == '__main__':
-    problem_45()
+    problem_46()
