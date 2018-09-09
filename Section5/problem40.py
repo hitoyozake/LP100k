@@ -330,7 +330,7 @@ def problem_47():
     key = ''
 
     for chunk in sentence:
-        for morph in chunk.morphs:
+        for index, morph in enumerate(chunk.morphs):
             if morph.pos == '助詞' and morph.surface == 'を':
                 if chunk.dst != -1:
                     for mrp in sentence[chunk.dst].morphs:
@@ -342,10 +342,11 @@ def problem_47():
             if morph.pos == '助詞':
                 if chunk.dst != -1:
                     for mrp in sentence[chunk.dst].morphs:
-                        if mrp.base == 'する':
+                        if mrp.pos == '動詞' and mrp.base == 'する':
                             v_dict[key].append(morph.surface)
                             v_dict2[key].append(
                             ''.join([m.surface for m in chunk.morphs]))
+                            v_dict2[key] = list(set(v_dict2[key]))
 
     for a, b in zip(v_dict.items(), v_dict2.items()):
         print("{0}: {1}, {2}".format(a[0], ' '.join(a[1]), ' '.join(b[1])))
