@@ -310,19 +310,42 @@ def problem_47():
     sentences = problem_41()
 
     sentence = sentences[7]
+    """
+    for index, s in enumerate(sentences):
+        flag = False
+        for chunk in s:
+            for morph in chunk.morphs:
+                if morph.surface == '及ば':
+                    sentence = sentences[index]
+                    flag = True
+            if flag:
+                print("{0}:{1}".format(index, ''.join([x.surface for x in chunk.morphs])))
+    """
+
+    sentence = sentences[948]
 
     v_dict = defaultdict(lambda: [])
     v_dict2 = defaultdict(lambda: [])
+
+    key = ''
+
+    for chunk in sentence:
+        for morph in chunk.morphs:
+            if morph.pos == '助詞' and morph.surface == 'を':
+                if chunk.dst != -1:
+                    for mrp in sentence[chunk.dst].morphs:
+                        if mrp.base == 'する':
+                            key = ''.join([x.base for x in chunk.morphs])+mrp.base
 
     for chunk in sentence:
         for morph in chunk.morphs:
             if morph.pos == '助詞':
                 if chunk.dst != -1:
                     for mrp in sentence[chunk.dst].morphs:
-                        if mrp.pos == '動詞':
-                            v_dict[mrp.base].append(morph.surface)
-                            v_dict2[mrp.base].append(''.join([m.surface for m in chunk.morphs]))
-
+                        if mrp.base == 'する':
+                            v_dict[key].append(morph.surface)
+                            v_dict2[key].append(
+                            ''.join([m.surface for m in chunk.morphs]))
 
     for a, b in zip(v_dict.items(), v_dict2.items()):
         print("{0}: {1}, {2}".format(a[0], ' '.join(a[1]), ' '.join(b[1])))
@@ -380,4 +403,4 @@ def problem_40():
 
 
 if __name__ == '__main__':
-    problem_46()
+    problem_47()
